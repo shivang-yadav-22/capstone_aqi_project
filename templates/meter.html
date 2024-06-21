@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+    crossorigin="anonymous"
+  />
+    <style>
+      *{
+        /* margin: 0;padding: 0; */
+        font-family:cursive;
+      }
+      body {
+        background-color: rgb(162, 205, 205);
+        font-family: "Open Sans", sans-serif;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .gauge {
+        display: inline-block;
+      }
+
+      .gauge > div[role="meter"] {
+        border-radius: 8rem 8rem 0 0;
+        border: 1px solid black;
+        width: 16rem;
+        height: 8rem;
+        background-color: black;
+        position: relative;
+        overflow: hidden;
+        background: conic-gradient(
+          from 0deg at 50% 100%,
+          red 30deg,
+          #8f3f97 30deg 60deg,
+          #7e0023 60deg 91deg,
+          transparent 91deg 269deg,
+          #00e400 269deg 300deg,
+          #ffff00 300deg 330deg,
+          #ff7e00 330deg 360deg
+        );
+      }
+
+      .gauge > label {
+        font-size: 14px;
+        text-align: center;
+        background-color: black;
+        padding: 0.2rem 0;
+        display: block;
+      }
+
+      .dial {
+        background-color: #00ff00;
+        transition: background-color 1s, color 0.25s;
+        border-radius: 10rem 10rem 0 0;
+        width: 70%;
+        height: 70%;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 0;
+        left: 15%;
+        z-index: 2;
+        overflow: hidden;
+        box-shadow: 0px 0px 0px 1rem #000;
+        border-bottom: none;
+        box-sizing: border-box;
+        color: #000;
+      }
+
+      .dial.white {
+        color: #fff;
+      }
+
+      .dial > span {
+        text-align: center;
+        font-family: sans-serif;
+      }
+
+      .dial > .arrow {
+        position: absolute;
+        left: calc(50% - 0.25rem);
+        bottom: 0;
+        width: 0.5rem;
+        height: calc(100% + 1px);
+        background-color: transparent;
+        transform-origin: bottom center;
+        transform: rotate(-90deg);
+        transition: transform 1s;
+      }
+
+      .dial > .arrow:after {
+        content: "";
+        border-left: 0.5rem solid transparent;
+        border-right: 0.5rem solid transparent;
+        border-top: 0.5rem solid #000;
+        position: absolute;
+        left: calc(50% - 0.5rem);
+        top: 0;
+        width: 0;
+        height: 0;
+        transition: border-color 0.25s;
+      }
+
+      .dial.white > .arrow:after {
+        border-top-color: #fff;
+      }
+
+      .aqi-num {
+        font-weight: bold;
+        font-size: 120%;
+        margin-top: 1.25rem;
+      }
+
+      @media (forced-colors: active) {
+        .dial {
+          border: 2px solid black;
+          border-bottom: none;
+        }
+
+        .gauge > div[role="meter"] {
+          border-width: 2px;
+          border-bottom: none;
+        }
+
+        .gauge > label {
+          border: 2px solid black;
+        }
+      }
+      #hulk {
+        max-width: 60%;
+        text-align: justify;
+      }
+      button{
+        background-color: transparent !important;
+        margin-left: 30px !important;
+        height: 35px;
+        
+      }
+      #healthImpact {
+        margin-top: 3px;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: transparent;
+        color: #0e0d0d !important;
+        font-size: 18px;
+        line-height: 1.5;
+        border: 20px solid rgb(178, 178, 180);
+    }
+      button a{
+        text-decoration: none;
+      }
+      .cont {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        text-align: justify;
+    }
+    .good {
+        background-color: rgb(170, 209, 170);
+        color: rgb(2, 99, 2);
+      }
+      .moderate {
+        background-color: rgb(214, 214, 182);
+        color: rgb(141, 141, 6);
+      }
+      .unhealthy {
+        background-color: rgb(211, 196, 167);
+        color: rgb(134, 89, 6);
+      }
+      .sensitive {
+        background-color: rgb(214, 172, 172);
+        color: rgb(133, 5, 5);
+      }
+      .hazardous {
+        background-color: rgb(202, 148, 148);
+        color: rgb(84, 5, 5);
+      }
+      .navbar123 {
+  background-color: #cac2c5 !important;
+  width: 100vw;
+}
+  .info{
+    margin: 25px;
+    font-size: 1.5rem;
+    height: 60px;
+    width: 50%;
+    background-color: transparent;
+    /* padding-left: 30px; */
+    text-align: justify;
+    text-align: center;
+    text-decoration: underline;
+  }
+  #res{
+    font-size: 2rem;
+    background-color: transparent;
+    color: #000;
+    margin-right: 470px;
+    /* text-decoration: underline; */
+    font-family:cursive;
+  }
+/* .box{
+  height: 40%;
+  width: 40% !important;
+  background-color: #fff;
+} */
+    </style>
+  </head>
+  <body class="{{pred}}">
+    <nav class="navbar navbar123 navbar-expand-lg ">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">ECO-AQI</a>
+       <div class="logo"></div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="http://127.0.0.1:5000/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.aqi.in/blog/aqi/">About</a>
+            </li>
+           
+          </ul>
+         <h1 id="res">RESULT</h1>
+          <button
+          id="b1"
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop"
+          >
+           
+            <a href="https://www.aqi.in/air-quality-map">MAP</a>
+          </button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div style="margin-bottom: 2rem">
+  
+    </div>
+    <!-- <div class="box">
+      xyz
+    </div> -->
+    <div class="gauge">
+      <div
+        role="meter"
+        aria-valuemin="0"
+        aria-valuemax="500"
+        aria-labelledby="meter-label"
+      >
+        <div class="dial">
+          <span class="aqi-num"></span><span>{{pred}}</span>
+
+          <div class="arrow"></div>
+        </div>
+      </div>
+      <label class="label" id="meter-label" style="color: #fff;">AQI</label>
+    </div>
+    <div class="info {{pred}}"><span>{{pred2}}</span></div>
+
+    <div class="cont">
+      <h1 style="text-align: center ">Air Quality Health Impact</h1>
+      <p id="healthImpact">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dignissimos molestiae commodi soluta qui! Distinctio quisquam ex incidunt illum delectus. Est dolorum culpa delectus iure quis vero iste pariatur rerum magni alias tenetur dolor, fugit facilis esse minus libero. Adipisci atque eligendi, veritatis ipsum quam ex optio voluptate debitis cum cupiditate dolore aut est quo nesciunt ab accusantium, quos, assumenda dolorem numquam. Officiis eius, facere id adipisci reiciendis expedita rerum.</p>
+  </div>
+   
+    <script>
+   
+       
+   const aqiValue = {{aqii}}; // Example AQI value
+
+// Function to determine health impact based on AQI value
+function getHealthImpact() {
+    let impactMessage = "";
+
+    if (aqiValue >= 0 && aqiValue <= 50) {
+        impactMessage = "Good - Air quality is considered satisfactory, and air pollution poses little or no risk. People can engage in outdoor activities without significant health concerns. The concentration of pollutants such as particulate matter (PM2.5 and PM10), ozone (O3), carbon monoxide (CO), sulfur dioxide (SO2), nitrogen dioxide (NO2), and other harmful substances remains within safe limits. Individuals with respiratory conditions, children, elderly people, and individuals with compromised immune systems can breathe easily in such conditions.";
+    } else if (aqiValue >= 51 && aqiValue <= 100) {
+        impactMessage = "Moderate - Air quality is acceptable; however, there may be some pollutants present that could be of concern to a very small number of sensitive individuals. Sensitive groups, including people with respiratory or heart conditions, children, and the elderly, may experience minor health effects in areas with moderate air quality. Most of the general population will not be significantly impacted, but those with pre-existing health issues may need to take precautions, such as limiting outdoor activities during periods of higher pollution or poor air quality.";
+    } else if (aqiValue >= 101 && aqiValue <= 150) {
+        impactMessage = "Sensitive - Sensitive air quality indicates that members of sensitive groups, such as individuals with respiratory or heart conditions, children, and the elderly, may experience health effects. While the general public is not likely to be affected, those in sensitive groups may notice symptoms such as coughing, throat irritation, or shortness of breath. It's important for individuals in sensitive groups to monitor air quality reports and consider reducing prolonged or heavy outdoor exertion during periods of sensitive air quality.";
+    } else if (aqiValue >= 151 && aqiValue <= 200) {
+        impactMessage = "Severe - Severe air quality indicates that everyone may begin to experience health effects, with members of sensitive groups facing more serious health impacts. The general population may experience symptoms such as coughing, wheezing, or difficulty breathing, especially during outdoor activities or prolonged exposure to polluted air. Individuals with pre-existing health conditions should take extra precautions and limit outdoor activities during periods of severe air quality.";
+    } else {
+        impactMessage = "Hazardous - Hazardous air quality represents a health alert where everyone may experience more serious health effects due to high levels of pollutants in the air. Prolonged exposure to hazardous air can lead to severe respiratory and cardiovascular issues, exacerbate existing health conditions, and pose significant risks to public health. It's critical for everyone, especially vulnerable populations such as children, the elderly, and individuals with respiratory or heart conditions, to avoid outdoor activities and minimize exposure to outdoor air.";
+    }
+
+    document.getElementById('healthImpact').textContent = impactMessage;
+}
+
+// Call the getHealthImpact function when the page loads
+window.onload = getHealthImpact;
+
+
+      function setDial(aqi) {
+        let angle = getAQIDialAngle(aqi);
+        let [bg, white] = getAQIColor(aqi);
+
+        let meter = document.querySelector(".gauge > div[role=meter]");
+        let dial = meter.querySelector(".dial");
+        meter.setAttribute("aria-valuenow", aqi);
+        meter.setAttribute("aria-valuetext", aqi);
+        dial.querySelector(".aqi-num").textContent = aqi;
+        dial.querySelector(".arrow").style.transform = `rotate(${
+          angle - 90
+        }deg)`;
+        dial.style.backgroundColor = bg;
+        dial.classList.toggle("white", white);
+      }
+
+      function getAQIDialAngle(aqi) {
+        if (aqi >= 301) {
+          return Math.min(((aqi - 301) / 200) * 30 + 150, 180);
+        } else if (aqi >= 201) {
+          return ((aqi - 201) / 100) * 30 + 120;
+        } else if (aqi >= 151) {
+          return ((aqi - 151) / 50) * 30 + 90;
+        } else if (aqi >= 101) {
+          return ((aqi - 101) / 50) * 30 + 60;
+        } else if (aqi >= 51) {
+          return ((aqi - 51) / 50) * 30 + 30;
+        } else if (aqi >= 0) {
+          return (aqi / 50) * 30;
+        } else {
+          return 0;
+        }
+      }
+
+      // function changeBodyColor() {
+      //      // Get the input value and convert to lowercase
+      //     document.body.className = {{pred}};  // Set the body background color based on the input value
+      // }
+      function getAQIColor(aqi) {
+        function combineColors(c1, c2, bias) {
+          return c1.map((c, i) => c * (1 - bias) + c2[i] * bias);
+        }
+
+        function stringifyColor(c) {
+          return `rgb(${c})`;
+        }
+
+        function calculateColors(c1, c2, bias) {
+          let bg = combineColors(c1, c2, bias);
+          let white = (bg[0] * 299 + bg[1] * 587 + bg[2] * 114) / 1000 < 128;
+          return [stringifyColor(bg), white];
+        }
+
+        const aqiColorMap = [
+          [0, [0, 255, 0]],
+          [50, [255, 255, 0]],
+          [100, [255, 126, 0]],
+          [150, [255, 0, 0]],
+          [200, [143, 63, 151]],
+          [300, [126, 0, 35]],
+        ];
+
+        for (let i in aqiColorMap) {
+          let [target, color] = aqiColorMap[i];
+          if (target > aqi) {
+            if (i == 0) {
+              return calculateColors(color, color, 1);
+            }
+
+            let [prevTarget, prevColor] = aqiColorMap[i - 1];
+            return calculateColors(
+              prevColor,
+              color,
+              (aqi - prevTarget) / (target - prevTarget)
+            );
+          }
+        }
+
+        let [, color] = aqiColorMap[aqiColorMap.length - 1];
+        return calculateColors(color, color, 1);
+      }
+
+      let range = {{aqii}};
+      setDial(range);
+
+      range.addEventListener("change", (evt) => {
+        setDial(evt.target.value);
+      });
+    </script>
+    
+     <script
+     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+     crossorigin="anonymous"
+   ></script>
+  </body>
+</html>
