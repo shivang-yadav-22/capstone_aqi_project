@@ -166,13 +166,9 @@ input {
   flex-direction: column;
   height: 400px;
   width: 500px;
-  /* background-color: ; */
-  /* backdrop-filter: blur(50px); Adjust the blur amount as needed */
   margin-left: 100px;
   margin-bottom: 90px;
-  /* margin-top: 50px; */
-  /* background-color: rgba(255, 255, 255, 0.5); */
-  /* align-items: start; */
+
 }
 #model123{
   width: 150px;
@@ -248,15 +244,8 @@ input {
                 <div class="modal-body">
                   <!-- Input form for air quality prediction -->
                   <form action="{{ url_for('predict') }}" method="post">
-                    <!-- <div class="lb">
-                    <label for="Temperature">Temperature</label>
-                    <input type="text" name="Temperature" id="Temperature" required /><br />
-                  </div>
-                  <div class="lb"></div>
-                    <label for="Humidity">Humidity</label>
-                    <input type="text" name="Humidity" id="Humidity" required /><br />
-                  </div> -->
-                
+          
+               
                   <div class="lb"><label for="NO">NO</label>
                     <input type="text" placeholder="0 to 100 ppb" name="NO" id="NO" required /><br />
                   </div>
@@ -284,16 +273,11 @@ input {
                   <div class="lb"><label for="Toluene">Toluene</label>
                     <input type="text" placeholder="0 to 1500 ug/m&sup3" name="Toluene" id="Toluene" required /><br />
                   </div>
-                    <!-- Model selection dropdown -->
                     <div class="lb"></div>
-                    <!-- <label for="model">Select:</label> -->
                     <select name="model" id="model123" required>
-                      <!-- <option value="Model 1">Bayesian</option> -->
                       <option value="Model 1">Lasso</option>
                       <option value="Model 2">Linear</option>
                       <option value="Model 3">Ridge</option>
-                      <!-- <option value="Model 4">Bayesian</option> -->
-                      <!-- <option value="Model 5">Knn</option> -->
                       </select
                     ><br />
                   </div>
@@ -301,10 +285,6 @@ input {
                     <button type="submit">Predict</button>
                   </div>
 
-                       <!-- Prediction display -->
-                       
-                      
-      
                   </form>
                  
                 </div>
@@ -313,7 +293,6 @@ input {
             </div>
           </div>
           
-         <!-- modal   -->
             </div>
           </div>
         </div>
@@ -333,12 +312,9 @@ input {
         (low risk) to hazardous (high risk).
       </p>
     </div>
-    <!-- <div id="blank"></div> -->
     <div class="container12"></div>
-    <!-- <div class="starlight"></div> -->
     
   </div>
-  <!-- <div class="sec">RESULT</div> -->
     <script src="stars.js"></script>
     <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -370,7 +346,6 @@ input {
     i++;
   }
 }
-
 stars();
 
   </script>
